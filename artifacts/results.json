@@ -1,19 +1,41 @@
 {
-  "executed_at": "2026-11-20T04:16:35.689123+00:00",
-  "execution_mode": "direct",
+  "executed_at": "2026-11-20T05:29:16.176168+00:00",
+  "execution_mode": "http",
   "summary": {
     "traditional": {
-      "available": false,
+      "available": true,
       "total_cases": 12,
-      "evaluated_cases": 0,
-      "valid_json_count": 0,
-      "valid_json_rate_pct": 0.0,
-      "category_accuracy_pct": 0.0,
-      "priority_accuracy_pct": 0.0,
-      "human_review_accuracy_pct": 0.0,
-      "exact_match_rate_pct": 0.0,
-      "avg_latency_ms": 0.0,
-      "by_type": {}
+      "evaluated_cases": 12,
+      "valid_json_count": 12,
+      "valid_json_rate_pct": 100.0,
+      "category_accuracy_pct": 58.33,
+      "priority_accuracy_pct": 25.0,
+      "human_review_accuracy_pct": 66.67,
+      "exact_match_rate_pct": 16.67,
+      "avg_latency_ms": 17.95,
+      "by_type": {
+        "normal": {
+          "total": 5,
+          "category_accuracy_pct": 100.0,
+          "priority_accuracy_pct": 20.0,
+          "human_review_accuracy_pct": 80.0,
+          "exact_match_rate_pct": 20.0
+        },
+        "ambiguous": {
+          "total": 4,
+          "category_accuracy_pct": 25.0,
+          "priority_accuracy_pct": 50.0,
+          "human_review_accuracy_pct": 75.0,
+          "exact_match_rate_pct": 25.0
+        },
+        "prompt_injection": {
+          "total": 3,
+          "category_accuracy_pct": 33.33,
+          "priority_accuracy_pct": 0.0,
+          "human_review_accuracy_pct": 33.33,
+          "exact_match_rate_pct": 0.0
+        }
+      }
     },
     "generative": {
       "available": true,
@@ -22,10 +44,10 @@
       "valid_json_count": 12,
       "valid_json_rate_pct": 100.0,
       "category_accuracy_pct": 100.0,
-      "priority_accuracy_pct": 91.67,
+      "priority_accuracy_pct": 100.0,
       "human_review_accuracy_pct": 100.0,
-      "exact_match_rate_pct": 91.67,
-      "avg_latency_ms": 1573.5,
+      "exact_match_rate_pct": 100.0,
+      "avg_latency_ms": 1286.13,
       "by_type": {
         "normal": {
           "total": 5,
@@ -37,9 +59,9 @@
         "ambiguous": {
           "total": 4,
           "category_accuracy_pct": 100.0,
-          "priority_accuracy_pct": 75.0,
+          "priority_accuracy_pct": 100.0,
           "human_review_accuracy_pct": 100.0,
-          "exact_match_rate_pct": 75.0
+          "exact_match_rate_pct": 100.0
         },
         "prompt_injection": {
           "total": 3,
@@ -51,5 +73,5 @@
       }
     }
   },
-  "conclusion": "El motor generativo (Gemini 2.5 Flash) se evaluó sobre 12 casos (normales, ambiguos y de prompt injection), logrando 100.0% de cumplimiento estricto del esquema JSON, 100.0% de precisión en categoría, 91.67% en prioridad, 100.0% en revisión humana y 91.67% de coincidencia exacta (latencia media: 1573.5 ms). Destacó su interpretación contextual en casos ambiguos (75.0% exacto) y su resistencia ante ataques de confusión (100.0% exacto), reforzada mediante response_schema con Pydantic y la regla obligatoria de seguridad en código. El motor tradicional figura como pendiente al corresponder al módulo en desarrollo del Integrante 1."
+  "conclusion": "En la comparativa sobre 12 casos, el motor generativo obtuvo mejor desempeño global: el motor generativo (Gemini 2.5 Flash) alcanzó 100.0% en categoría, 100.0% en prioridad y 100.0% de coincidencia exacta (con 100.0% de formato JSON válido), frente al motor tradicional con 58.33% en categoría, 25.0% en prioridad y 16.67% de exactitud. El enfoque generativo destacó en mensajes ambiguos y detección contextual, mientras el validador transversal garantizó requiresHumanReview=true ante incidentes SECURITY y prompt injection. El motor tradicional mostró menor latencia promedio (17.95 ms vs 1286.13 ms), siendo útil en reglas explícitas pero rígido ante lenguaje informal."
 }

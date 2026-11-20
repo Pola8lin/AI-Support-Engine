@@ -116,7 +116,7 @@ class GenerativeStrategy(AnalysisStrategy):
         wrapped_prompt: str,
         config: types.GenerateContentConfig,
     ) -> Any:
-        """Invoca el modelo configurado con fallback ordenado ante 404/503/504."""
+        """Invoca el modelo configurado con fallback ordenado ante 404/429/503/504."""
         candidates = [self.model_name] + [
             model for model in FALLBACK_GEMINI_MODELS if model != self.model_name
         ]
@@ -135,7 +135,7 @@ class GenerativeStrategy(AnalysisStrategy):
                 last_exc = exc
                 status = getattr(exc, "code", None)
                 has_next = index + 1 < len(candidates)
-                if status in (404, 503, 504) and has_next:
+                if status in (404, 429, 503, 504) and has_next:
                     continue
                 raise
 

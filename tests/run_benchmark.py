@@ -18,7 +18,6 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from src.models.response import AnalysisMode, AnalyzeResponse
 from src.strategies.generative import GenerativeProviderError, GenerativeStrategy
-from src.validators.response_validator import validate_and_enforce_response
 
 DATASET_PATH = PROJECT_ROOT / "tests" / "dataset.json"
 RAW_EVIDENCE_PATH = PROJECT_ROOT / "evidence" / "benchmark_raw_results.json"
@@ -84,11 +83,11 @@ def _evaluate_via_http(
 
     try:
         payload = resp.json()
-        validated = validate_and_enforce_response(
-            raw_response=payload,
-            original_message=message,
-            mode=mode,
-        )
+        validated = AnalyzeResponse.model_validate(payload)
+        if validated.mode != mode:
+            raise ValueError(
+                f"Se esperaba mode={mode.value}, pero la API devolvió mode={validated.mode.value}."
+            )
         return {
             "status": "ok",
             "http_status": resp.status_code,
