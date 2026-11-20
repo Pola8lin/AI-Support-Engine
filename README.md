@@ -2,6 +2,11 @@
 
 Initial project structure for an AI-powered support engine.
 
+## Equipo
+
+Eduardo Daniel Santos Villagrán
+Ana Paola Palacios Lindo
+
 ## Structure
 
 ```text
